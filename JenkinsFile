@@ -1,0 +1,36 @@
+pipeline {
+    agent any  // Use any available agent (executor)
+
+    stages {
+        stage('Checkout') { // Pulls code from the repository
+            steps {
+                git url: 'https://github.com/Darksun2001/sample-java-app.git'
+            }
+        }
+
+        stage('Build') { // Compiles the Java code
+            steps {
+                sh 'chmod +x build.sh'
+                sh './build.sh'
+            }
+        }
+
+        stage('Test') { // (Optional) Add any tests if needed
+            steps {
+                echo 'No tests implemented yet.'
+            }
+        }
+        
+        stage('Deploy') { // (Optional) Add deployment step if needed
+            steps {
+                echo 'No deployment step added.'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline complete.'
+        }
+    }
+}
